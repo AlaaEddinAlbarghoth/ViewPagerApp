@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">ViewPagerApp</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_fragment">Hello %1$s fragment</string>
+
+</resources>
