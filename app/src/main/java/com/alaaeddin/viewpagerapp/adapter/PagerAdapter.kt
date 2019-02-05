@@ -1,13 +1,9 @@
-package com.alaaeddin.viewpagerapp.adaoter
+package com.alaaeddin.viewpagerapp.adapter
 
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
-import com.alaaeddin.viewpagerapp.R
-import com.alaaeddin.viewpagerapp.fragments.FirstFragment
-import com.alaaeddin.viewpagerapp.fragments.SecondFragment
-import com.alaaeddin.viewpagerapp.fragments.ThirdFragment
-
+import com.alaaeddin.viewpagerapp.fragments.home.subfragments.XFragment
 
 class PagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
@@ -24,9 +20,9 @@ class PagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
         }
 
         return when (p) {
-            0 -> FirstFragment.newInstance(tabString)
-            1 -> SecondFragment.newInstance(tabString)
-            2 -> ThirdFragment.newInstance(tabString)
+            0 -> XFragment.newInstance(tabString)
+            1 -> XFragment.newInstance(tabString)
+            2 -> XFragment.newInstance(tabString)
             else -> null
         }
     }
