@@ -2,11 +2,12 @@ package com.alaaeddin.viewpagerapp
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.support.design.widget.TabLayout
-import android.support.v4.view.ViewPager
+import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
-import com.alaaeddin.viewpagerapp.adaoter.PagerAdapter
+import com.alaaeddin.viewpagerapp.fragments.dashboard.DashboardFragment
+import com.alaaeddin.viewpagerapp.fragments.home.HomeFragment
+import com.alaaeddin.viewpagerapp.fragments.music.MusicFragment
+import kotlinx.android.synthetic.main.activity_main.*
 
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
@@ -16,19 +17,25 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val toolBar: Toolbar = findViewById(R.id.toolbar)
-        toolBar.title = resources.getString(R.string.app_name)
-        setSupportActionBar(toolBar)
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_container,
+            HomeFragment()).commit()
 
-        /** Set ViewPager (Adapter, Listener)*/
-        /* Adapter */
-        val pagerAdapter = PagerAdapter(supportFragmentManager)
+        bottom_navigation.setOnNavigationItemSelectedListener {
+            lateinit var selectedFragment: Fragment
 
-        /* Pager */
-        val mViewPager: ViewPager = findViewById(R.id.pager)
-        mViewPager.adapter = pagerAdapter
+            when (it.itemId) {
+                R.id.action_favorites ->
+                    selectedFragment = HomeFragment()
+                R.id.action_schedules ->
+                    selectedFragment = DashboardFragment()
+                R.id.action_music ->
+                    selectedFragment = MusicFragment()
+            }
 
-        val tabLayout: TabLayout = findViewById(R.id.tabs)
-        tabLayout.setupWithViewPager(mViewPager)
+            supportFragmentManager.beginTransaction().replace(R.id.fragment_container,
+                selectedFragment).commit()
+
+            return@setOnNavigationItemSelectedListener true
+        }
     }
 }
